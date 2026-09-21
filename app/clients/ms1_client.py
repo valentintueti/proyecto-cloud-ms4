@@ -28,3 +28,12 @@ async def obtener_tarjetas_batch(ids: list[int]) -> list[dict]:
             return response.json()
         except httpx.RequestError as e:
             raise ExternalServiceError(f"No se pudo conectar a MS1: {e}")
+
+async def obtener_tarjetas_por_pasajero(pasajero_id: int) -> list[dict]:
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(f"{settings.MS1_BASE_URL}/pasajeros/{pasajero_id}/tarjetas")
+            response.raise_for_status()
+            return response.json()
+        except httpx.RequestError as e:
+            raise ExternalServiceError(f"No se pudo conectar a MS1: {e}")
