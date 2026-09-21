@@ -1,10 +1,11 @@
+import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from app.routers import historial_router
 from app.core.exceptions import NotFoundError, ExternalServiceError
 
-app = FastAPI(title="MS4 - Historial")
+app = FastAPI(title="MS4 - Historial", root_path=os.getenv("ROOT_PATH", ""))
 
 @app.exception_handler(NotFoundError)
 async def not_found_handler(request: Request, exc: NotFoundError):
