@@ -23,3 +23,24 @@ class HistorialResponse(BaseModel):
     nombre: str
     viajes: List[ViajeEnriquecido]
     conexiones: List[ConexionEnriquecida]
+
+class ViajesResponse(BaseModel):
+    pasajero_id: int
+    viajes: List[ViajeEnriquecido]
+
+class ResumenResponse(BaseModel):
+    pasajero_id: int
+    total_viajes: int
+    total_conexiones: int
+    tipo_servicio_mas_usado: Optional[str] = None
+    ultimo_viaje: Optional[str] = None
+
+class TarjetaConUso(BaseModel):
+    id: int
+    tipo: str
+    saldo: float
+    veces_usada: int
+
+class TarjetasResponse(BaseModel):
+    pasajero_id: int
+    tarjetas: List[TarjetaConUso]
